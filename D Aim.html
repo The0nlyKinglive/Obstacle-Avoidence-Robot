@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autonomous Robot · Aim & Objectives</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #d9e2ef;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Inter', 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            padding: 2rem;
+        }
+
+        .slide {
+            max-width: 1280px;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background-color: #ffffff;
+            border-radius: 2.5rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 40, 80, 0.25), 0 8px 20px -8px rgba(0, 30, 60, 0.2);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            border: 1px solid rgba(22, 119, 255, 0.15);
+        }
+
+        /* RGB ACCENT STRIP */
+        .accent-strip {
+            height: 12px;
+            background: linear-gradient(90deg, #1677ff, #ff4d6d, #00ffff, #b967ff, #ff4d6d, #1677ff);
+            background-size: 400% 100%;
+            animation: rgbBand 5s linear infinite;
+            width: 100%;
+        }
+
+        @keyframes rgbBand {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        .image-header {
+            width: 100%;
+            height: 200px;
+            background-color: #e6f0ff;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 2px solid rgba(22, 119, 255, 0.25);
+        }
+
+        .image-header img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: 50% 30%;
+            display: block;
+        }
+
+        .image-header::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(135deg, rgba(22,119,255,0.1) 0%, rgba(255,255,255,0) 60%);
+            pointer-events: none;
+        }
+
+        .content-panel {
+            background: #ffffff;
+            padding: 1.8rem 2.8rem 2rem 2.8rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            gap: 1rem;
+        }
+
+        /* LARGER RGB HEADING */
+        .main-heading {
+            font-size: 4rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .main-heading .rgb-text {
+            background: linear-gradient(90deg, #1677ff, #ff4d6d, #00c3ff, #b967ff, #1677ff);
+            background-size: 400% 100%;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: rgbHeading 6s ease infinite;
+        }
+
+        @keyframes rgbHeading {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .main-heading span {
+            background: #1677ff;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 500;
+            padding: 0.3rem 1.5rem;
+            border-radius: 40px;
+            letter-spacing: 0.3px;
+        }
+
+        .desc-text {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: #1e2f47;
+            font-weight: 400;
+            max-width: 90%;
+        }
+
+        .desc-text + .desc-text {
+            margin-top: 0.25rem;
+        }
+
+        .objectives-lead {
+            font-size: 1.4rem;
+            font-weight: 600;
+            background: linear-gradient(90deg, #1677ff, #b967ff);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-top: 0.8rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .objectives-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem 2rem;
+            margin: 1rem 0 0.8rem 0;
+        }
+
+        .objective-card {
+            display: flex;
+            gap: 0.8rem;
+            align-items: flex-start;
+            border-bottom: 1px dashed rgba(22, 119, 255, 0.2);
+            padding-bottom: 0.8rem;
+        }
+
+        .obj-num {
+            font-size: 2.2rem;
+            font-weight: 700;
+            font-style: italic;
+            background: linear-gradient(90deg, #1677ff, #ff4d6d);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+            min-width: 2.2rem;
+            text-align: right;
+        }
+
+        .obj-content {
+            flex: 1;
+        }
+
+        .obj-title {
+            font-size: 1.4rem;
+            font-weight: 650;
+            color: #102a41;
+            margin-bottom: 0.2rem;
+        }
+
+        .obj-desc {
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #3e5670;
+            font-weight: 400;
+        }
+
+        .summary-text {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: #1e3b5a;
+            margin-top: 0.6rem;
+            border-left: 4px solid #1677ff;
+            padding-left: 1.2rem;
+            background: #f5faff;
+            padding: 0.8rem 1.2rem;
+            border-radius: 0 1rem 1rem 0;
+        }
+
+        .footer-note {
+            margin-top: 0.5rem;
+            display: flex;
+            justify-content: flex-end;
+            font-size: 0.75rem;
+            color: #a0b8d0;
+            border-top: 1px solid rgba(22, 119, 255, 0.15);
+            padding-top: 0.5rem;
+        }
+
+        @media (max-width: 1000px) {
+            .objectives-grid { grid-template-columns: 1fr; }
+            .desc-text { max-width: 100%; }
+            .main-heading { font-size: 3.2rem; }
+        }
+    </style>
+    
+    <!-- NAVIGATION SCRIPT -->
+    <script>
+        const pages = [
+            'A Main Slide.html',
+            'B Index.html',
+            'C Introduction.html',
+            'D Aim.html',
+            'E Components.html',
+            'F Working Principle.html',
+            'G Apllication.html',
+            'H Conclusion.html',
+            'I Thank you.html'
+        ];
+
+        const currentFile = window.location.pathname.split('/').pop();
+        let currentIndex = pages.indexOf(currentFile);
+        if (currentIndex === -1) {
+            for (let i = 0; i < pages.length; i++) {
+                if (currentFile.toLowerCase().includes('aim') && pages[i].includes('Aim')) {
+                    currentIndex = i;
+                    break;
+                }
+            }
+        }
+        if (currentIndex === -1) currentIndex = 3;
+
+        window.nextPage = function() {
+            window.location.href = pages[(currentIndex + 1) % pages.length];
+        };
+
+        window.previousPage = function() {
+            window.location.href = pages[(currentIndex - 1 + pages.length) % pages.length];
+        };
+
+        document.addEventListener('DOMContentLoaded', function() {
+            document.addEventListener('keydown', function(event) {
+                if (event.key === ' ' || event.key === 'Spacebar' || event.key === 'Enter' || event.key === 'ArrowRight') {
+                    event.preventDefault();
+                    window.nextPage();
+                }
+                else if (event.key === 'ArrowLeft') {
+                    event.preventDefault();
+                    window.previousPage();
+                }
+            });
+
+            const navDiv = document.createElement('div');
+            navDiv.id = 'nav-buttons';
+            navDiv.style.cssText = `
+                position: fixed;
+                bottom: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                display: flex;
+                gap: 20px;
+                z-index: 10000;
+                background: white;
+                padding: 12px 25px;
+                border-radius: 50px;
+                box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+                border: 2px solid #1677ff;
+            `;
+            navDiv.innerHTML = `
+                <button onclick="window.previousPage()" style="background:#4a5568; color:white; border:none; padding:8px 25px; border-radius:30px; cursor:pointer; font-size:16px;">← Previous</button>
+                <span style="font-weight:bold; color:#1677ff; padding:8px 0; font-size:16px;">Page ${currentIndex + 1} of ${pages.length}</span>
+                <button onclick="window.nextPage()" style="background:#1677ff; color:white; border:none; padding:8px 25px; border-radius:30px; cursor:pointer; font-size:16px;">Next →</button>
+            `;
+            document.body.appendChild(navDiv);
+        });
+    </script>
+</head>
+<body>
+    <div class="slide">
+        <div class="accent-strip"></div>
+
+        <div class="image-header">
+            <img src="https://cdn.pi.inc/ai/generate/6373067c06884781accfd78c296361687df5ada8498e8b0a38e6bd40.webp" 
+                 alt="Autonomous robot navigating obstacles"
+                 loading="lazy">
+        </div>
+
+        <div class="content-panel">
+            <!-- LARGER RGB HEADING -->
+            <div class="main-heading">
+                <span class="rgb-text"><h1>2. AIM</h1></span> <span>project goal</span>
+            </div>
+
+            <div class="desc-text">
+                The main aim of this project is to develop an autonomous and intelligent robotic system that can move safely, make correct decisions, and function reliably in different and changing environments.
+            </div>
+
+            <div class="desc-text">
+                In simple words, we wanted to build a robot that can observe its surroundings, think logically, and make safe decisions without any human control.
+            </div>
+
+            <div class="objectives-lead">
+                ⚙️ This project focuses on important objectives such as:
+            </div>
+
+            <div class="objectives-grid">
+                <div class="objective-card">
+                    <div class="obj-num">1</div>
+                    <div class="obj-content">
+                        <div class="obj-title">Sensor integrity</div>
+                        <div class="obj-desc">ensuring the sensor gives accurate and consistent readings so the robot does not make wrong decisions.</div>
+                    </div>
+                </div>
+                <div class="objective-card">
+                    <div class="obj-num">2</div>
+                    <div class="obj-content">
+                        <div class="obj-title">Real-time processing</div>
+                        <div class="obj-desc">allowing the robot to quickly understand the situation and respond immediately.</div>
+                    </div>
+                </div>
+                <div class="objective-card">
+                    <div class="obj-num">3</div>
+                    <div class="obj-content">
+                        <div class="obj-title">Adaptive navigation</div>
+                        <div class="obj-desc">enabling the robot to change its direction based on obstacles in its path.</div>
+                    </div>
+                </div>
+                <div class="objective-card">
+                    <div class="obj-num">4</div>
+                    <div class="obj-content">
+                        <div class="obj-title">Environmental awareness</div>
+                        <div class="obj-desc">helping the robot stay aware of objects and people around it.</div>
+                    </div>
+                </div>
+                <div class="objective-card">
+                    <div class="obj-num">5</div>
+                    <div class="obj-content">
+                        <div class="obj-title">Collision prevention system</div>
+                        <div class="obj-desc">making sure the robot avoids hitting obstacles and moves safely.</div>
+                    </div>
+                </div>
+                <div class="objective-card">
+                    <div class="obj-num">6</div>
+                    <div class="obj-content">
+                        <div class="obj-title">System reliability and stability</div>
+                        <div class="obj-desc">ensuring the robot works smoothly and continuously without errors.</div>
+                    </div>
+                </div>
+                <div class="objective-card">
+                    <div class="obj-num">7</div>
+                    <div class="obj-content">
+                        <div class="obj-title">Logical algorithm-based decision making</div>
+                        <div class="obj-desc">allowing the robot to follow programmed reasoning instead of random movement.</div>
+                    </div>
+                </div>
+                <div class="objective-card">
+                    <div class="obj-num">8</div>
+                    <div class="obj-content">
+                        <div class="obj-title">Human-safe design</div>
+                        <div class="obj-desc">The robot should operate safely near people.</div>
+                    </div>
+                </div>
+                <div class="objective-card">
+                    <div class="obj-num">9</div>
+                    <div class="obj-content">
+                        <div class="obj-title">Scalability concept</div>
+                        <div class="obj-desc">The system should be expandable for future improvements.</div>
+                    </div>
+                </div>
+                <div class="objective-card">
+                    <div class="obj-num">10</div>
+                    <div class="obj-content">
+                        <div class="obj-title">Precision control</div>
+                        <div class="obj-desc">The robot should move accurately and smoothly.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="summary-text">
+                So overall, our aim was not just to build a simple moving machine, but to create a smart, responsive, and safe system that represents the foundation of modern intelligent robotics.
+            </div>
+
+            <div class="summary-text" style="border-left-color: #5b8cff; background: #f1f7fe;">
+                This small model demonstrates how future technologies like autonomous vehicles and service robots are designed to operate independently in complex real-world environments.
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quarky Controller · Exhibition Display</title>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* Main Container */
+        .exhibition-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 40px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Header with RGB effect */
+        .exhibition-header {
+            background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #ff6b6b);
+            background-size: 400% 100%;
+            animation: rgbFlow 10s linear infinite;
+            padding: 20px;
+            text-align: center;
+        }
+
+        @keyframes rgbFlow {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        .exhibition-header h1 {
+            font-size: 4rem;
+            color: white;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+            letter-spacing: 2px;
+        }
+
+        .exhibition-header p {
+            font-size: 1.5rem;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Main Content */
+        .exhibition-content {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 40px;
+            gap: 40px;
+        }
+
+        /* Left Side - Image */
+        .image-section {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+        }
+
+        .quarky-image {
+            width: 100%;
+            max-width: 400px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 30px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .quarky-image img {
+            width: 100%;
+            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.2));
+        }
+
+        .image-caption {
+            margin-top: 20px;
+            font-size: 1.2rem;
+            color: #555;
+            font-weight: 500;
+        }
+
+        /* Right Side - Information */
+        .info-section {
+            flex: 2;
+            min-width: 300px;
+        }
+
+        /* Info Cards */
+        .info-card {
+            background: #f8f9fa;
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid #667eea;
+            transition: all 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateX(10px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.3);
+        }
+
+        .info-card h2 {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-card h2 i {
+            color: #667eea;
+            font-size: 2rem;
+        }
+
+        .info-card p {
+            font-size: 1.2rem;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        /* Easy-to-understand bullet points */
+        .easy-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .easy-list li {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            padding: 10px 15px;
+            background: white;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .easy-list li i {
+            width: 30px;
+            color: #667eea;
+            font-size: 1.3rem;
+        }
+
+        .easy-list li span {
+            color: #555;
+        }
+
+        .easy-list li strong {
+            color: #333;
+            font-size: 1.1rem;
+        }
+
+        /* Fun Facts Grid */
+        .fun-facts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .fun-fact {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .fun-fact i {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .fun-fact .fact-number {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .fun-fact .fact-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Simple Specs Box */
+        .specs-box {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .spec-item {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .spec-item i {
+            font-size: 2rem;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .spec-item h3 {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .spec-item p {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #333;
+            margin: 0;
+        }
+
+        /* Kid-Friendly Language Box */
+        .kid-friendly {
+            background: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+
+        .kid-friendly h3 {
+            color: #856404;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .kid-friendly p {
+            color: #856404;
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+
+        /* Project Examples */
+        .project-showcase {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 15px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .project-card i {
+            font-size: 2.5rem;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .project-card h4 {
+            font-size: 1.1rem;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .project-card p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Navigation Buttons for Exhibition */
+        .exhibition-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            background: #f1f3f5;
+            border-top: 2px solid #dee2e6;
+        }
+
+        .nav-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .page-indicator {
+            font-size: 1.2rem;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .page-indicator i {
+            color: #667eea;
+            margin: 0 5px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .exhibition-header h1 { font-size: 2.5rem; }
+            .exhibition-content { flex-direction: column; }
+            .project-showcase { grid-template-columns: 1fr; }
+            .specs-box { grid-template-columns: 1fr; }
+            .exhibition-nav { flex-direction: column; gap: 15px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="exhibition-container">
+        <!-- Header -->
+        <div class="exhibition-header">
+            <h1>🤖 MEET QUARKY!</h1>
+            <p>The Brain of Our Obstacle Avoidance Robot</p>
+        </div>
+
+        <!-- Main Content -->
+        <div class="exhibition-content">
+            <!-- Left Side - Image -->
+            <div class="image-section">
+                <div class="quarky-image">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2942/2942540.png" alt="Quarky Controller">
+                </div>
+                <div class="image-caption">
+                    <i class="fas fa-microchip"></i> Quarky Controller Board
+                </div>
+                
+                <!-- Fun Facts (Right under image) -->
+                <div class="fun-facts">
+                    <div class="fun-fact">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <div class="fact-number">240MHz</div>
+                        <div class="fact-label">Speed</div>
+                    </div>
+                    <div class="fun-fact">
+                        <i class="fas fa-memory"></i>
+                        <div class="fact-number">4MB</div>
+                        <div class="fact-label">Memory</div>
+                    </div>
+                    <div class="fun-fact">
+                        <i class="fas fa-wifi"></i>
+                        <div class="fact-number">WiFi</div>
+                        <div class="fact-label">Built-in</div>
+                    </div>
+                    <div class="fun-fact">
+                        <i class="fas fa-bluetooth"></i>
+                        <div class="fact-number">BLE</div>
+                        <div class="fact-label">Bluetooth</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Side - Information -->
+            <div class="info-section">
+                <!-- What is Quarky? - Simple Explanation -->
+                <div class="info-card">
+                    <h2><i class="fas fa-question-circle"></i> What is Quarky?</h2>
+                    <p>Quarky is like the <strong>brain</strong> of our robot! Just like your brain tells your body what to do, Quarky tells the robot when to move, turn, or stop. It's a small computer that thinks and makes decisions!</p>
+                    
+                    <!-- Kid-Friendly Box -->
+                    <div class="kid-friendly">
+                        <h3><i class="fas fa-child"></i> For Beginners: Think of it like this...</h3>
+                        <p>🤔 Imagine Quarky as the robot's brain:<br>
+                        👁️ It gets information from the robot's eyes (ultrasonic sensor)<br>
+                        🧠 It thinks about what to do (processing)<br>
+                        🦵 It tells the robot's legs (motors) how to move!</p>
+                    </div>
+                </div>
+
+                <!-- What does it do? - Simple List -->
+                <div class="info-card">
+                    <h2><i class="fas fa-tasks"></i> What does Quarky do?</h2>
+                    <ul class="easy-list">
+                        <li>
+                            <i class="fas fa-eye"></i>
+                            <span><strong>SEES</strong> - Connects to sensors to detect obstacles</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-brain"></i>
+                            <span><strong>THINKS</strong> - Processes information quickly</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-arrow-right"></i>
+                            <span><strong>DECIDES</strong> - Chooses which way to go</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-motorcycle"></i>
+                            <span><strong>CONTROLS</strong> - Tells motors when to move</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-wifi"></i>
+                            <span><strong>CONNECTS</strong> - Can talk to phones and WiFi</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Easy Specifications -->
+                <div class="info-card">
+                    <h2><i class="fas fa-chart-bar"></i> Quick Specs (Simple Version)</h2>
+                    <div class="specs-box">
+                        <div class="spec-item">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <h3>Speed</h3>
+                            <p>Super Fast</p>
+                        </div>
+                        <div class="spec-item">
+                            <i class="fas fa-plug"></i>
+                            <h3>Power</h3>
+                            <p>5V USB</p>
+                        </div>
+                        <div class="spec-item">
+                            <i class="fas fa-puzzle-piece"></i>
+                            <h3>Connections</h3>
+                            <p>8 Pins</p>
+                        </div>
+                        <div class="spec-item">
+                            <i class="fas fa-weight"></i>
+                            <h3>Weight</h3>
+                            <p>Very Light</p>
+                        </div>
+                    </div>
+                    <p style="text-align: center; margin-top: 10px; color: #666;">✨ Perfect for learning robotics!</p>
+                </div>
+
+                <!-- What can we build? -->
+                <div class="info-card">
+                    <h2><i class="fas fa-rocket"></i> Cool Projects with Quarky</h2>
+                    <div class="project-showcase">
+                        <div class="project-card">
+                            <i class="fas fa-robot"></i>
+                            <h4>Obstacle Robot</h4>
+                            <p>Our project! Avoids things in its path</p>
+                        </div>
+                        <div class="project-card">
+                            <i class="fas fa-car"></i>
+                            <h4>Line Follower</h4>
+                            <p>Follows black lines on the floor</p>
+                        </div>
+                        <div class="project-card">
+                            <i class="fas fa-lightbulb"></i>
+                            <h4>Smart Light</h4>
+                            <p>Turns on when you enter</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Why is it special? -->
+                <div class="info-card">
+                    <h2><i class="fas fa-star"></i> Why Quarky is Awesome</h2>
+                    <ul class="easy-list">
+                        <li>
+                            <i class="fas fa-check-circle" style="color: #28a745;"></i>
+                            <span><strong>Easy to Use</strong> - Perfect for beginners</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle" style="color: #28a745;"></i>
+                            <span><strong>Built-in WiFi</strong> - Can connect to internet</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle" style="color: #28a745;"></i>
+                            <span><strong>Motor Drivers</strong> - Can control motors directly</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle" style="color: #28a745;"></i>
+                            <span><strong>RGB Lights</strong> - Colorful LED indicators</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle" style="color: #28a745;"></i>
+                            <span><strong>Small Size</strong> - Fits in your palm!</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- In Our Robot -->
+                <div class="info-card" style="border-left-color: #28a745;">
+                    <h2><i class="fas fa-robot" style="color: #28a745;"></i> In OUR Obstacle Robot</h2>
+                    <p>Quarky is the hero of our project! It:</p>
+                    <ul class="easy-list">
+                        <li>
+                            <i class="fas fa-1"></i>
+                            <span>Reads the ultrasonic sensor (checks for obstacles)</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-2"></i>
+                            <span>Decides whether to go straight, left, or right</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-3"></i>
+                            <span>Tells the motors when to move and when to stop</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-4"></i>
+                            <span>Makes the robot smart and independent!</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation for Exhibition -->
+        <div class="exhibition-nav">
+            <button class="nav-btn" onclick="window.location.href='D Aim.html'">
+                <i class="fas fa-arrow-left"></i> Previous: Aim
+            </button>
+            <div class="page-indicator">
+                <i class="fas fa-circle"></i> Page 5 of 9 <i class="fas fa-circle"></i>
+            </div>
+            <button class="nav-btn" onclick="window.location.href='F Working Principle.html'">
+                Next: Working <i class="fas fa-arrow-right"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Simple Keyboard Navigation -->
+    <script>
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight') {
+                window.location.href = 'F Working Principle.html';
+            } else if (e.key === 'ArrowLeft') {
+                window.location.href = 'D Aim.html';
+            }
+        });
+    </script>
+</body>
+</html>

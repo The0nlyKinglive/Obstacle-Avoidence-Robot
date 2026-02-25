@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You · Autonomous Robot</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #d9e2ef;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Inter', 'Segoe UI', 'Poppins', sans-serif;
+            padding: 2rem;
+        }
+
+        .slide {
+            max-width: 1280px;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: linear-gradient(145deg, #ffffff 0%, #f5f9ff 100%);
+            border-radius: 3rem;
+            box-shadow: 0 30px 50px -20px rgba(22, 119, 255, 0.3);
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid rgba(22, 119, 255, 0.2);
+        }
+
+        .pattern-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: radial-gradient(circle at 30% 40%, rgba(22, 119, 255, 0.03) 0%, transparent 30%),
+                              radial-gradient(circle at 70% 60%, rgba(22, 119, 255, 0.03) 0%, transparent 30%);
+            z-index: 1;
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(22, 119, 255, 0.05);
+            z-index: 2;
+        }
+
+        .shape-1 {
+            width: 400px; height: 400px; top: -150px; right: -100px;
+            background: radial-gradient(circle, rgba(22, 119, 255, 0.1), transparent);
+            animation: float 18s infinite alternate;
+        }
+
+        .shape-2 {
+            width: 350px; height: 350px; bottom: -150px; left: -80px;
+            background: radial-gradient(circle, rgba(100, 180, 255, 0.08), transparent);
+            animation: float 15s infinite alternate-reverse;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(30px, 30px) scale(1.1); }
+        }
+
+        .content {
+            position: relative;
+            z-index: 20;
+            text-align: center;
+            color: #0a1a2f;
+            padding: 2rem;
+            max-width: 90%;
+        }
+
+        /* LARGER RGB THANK YOU TEXT */
+        .thankyou-main {
+            font-size: 10rem;
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, #1677ff, #ff4d6d, #00c3ff, #b967ff, #ff4d6d, #1677ff);
+            background-size: 400% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: rgbThankYou 8s ease infinite;
+            letter-spacing: -0.02em;
+        }
+
+        @keyframes rgbThankYou {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .circle-decoration {
+            display: flex; 
+            gap: 1rem; 
+            justify-content: center; 
+            margin: 2rem 0 1.5rem;
+        }
+
+        .circle {
+            width: 14px; 
+            height: 14px; 
+            border-radius: 50%;
+            background: linear-gradient(135deg, #1677ff, #b967ff);
+            box-shadow: 0 0 15px #1677ff;
+            animation: pulse 1.5s infinite alternate;
+        }
+
+        .circle:nth-child(2) { animation-delay: 0.2s; }
+        .circle:nth-child(3) { animation-delay: 0.4s; }
+        .circle:nth-child(4) { animation-delay: 0.6s; }
+        .circle:nth-child(5) { animation-delay: 0.8s; }
+        .circle:nth-child(6) { animation-delay: 1s; }
+        .circle:nth-child(7) { animation-delay: 1.2s; }
+        .circle:nth-child(8) { animation-delay: 1.4s; }
+
+        @keyframes pulse {
+            0% { opacity: 0.5; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1.2); }
+        }
+
+        .robot-icon {
+            font-size: 5rem; 
+            margin-bottom: 0.5rem;
+            filter: drop-shadow(0 5px 15px rgba(22, 119, 255, 0.4));
+            animation: bounce 2s infinite alternate;
+            display: inline-block;
+        }
+
+        @keyframes bounce {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(-15px) rotate(5deg); }
+        }
+
+        .thankyou-sub {
+            font-size: 2.5rem; 
+            font-weight: 500; 
+            letter-spacing: 0.2em;
+            background: linear-gradient(90deg, #1677ff, #b967ff);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-top: 1rem;
+            border-top: 2px solid rgba(22, 119, 255, 0.3);
+            border-bottom: 2px solid rgba(22, 119, 255, 0.3);
+            padding: 0.8rem 2rem; 
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(5px); 
+            border-radius: 50px;
+        }
+
+        .project-name {
+            margin-top: 2rem; 
+            font-size: 1.4rem;
+            color: #8a9bb8; 
+            letter-spacing: 0.15em;
+        }
+
+        .project-name span {
+            background: linear-gradient(90deg, #1677ff, #ff4d6d);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700; 
+            font-size: 1.8rem;
+        }
+
+        .confetti {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 5;
+        }
+
+        .confetti span {
+            position: absolute; width: 8px; height: 8px;
+            background: linear-gradient(90deg, #1677ff, #ff4d6d);
+            opacity: 0.2; 
+            border-radius: 50%;
+            animation: confettiFall 10s linear infinite;
+        }
+
+        @keyframes confettiFall {
+            0% { transform: translateY(-100px) rotate(0deg); opacity: 0.2; }
+            100% { transform: translateY(1000px) rotate(720deg); opacity: 0; }
+        }
+
+        @media (max-width: 900px) {
+            .thankyou-main { font-size: 6rem; }
+            .thankyou-sub { font-size: 1.8rem; }
+            .robot-icon { font-size: 4rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <div class="pattern-bg"></div>
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        
+        <div class="confetti">
+            <span style="left: 10%; animation-duration: 8s;"></span>
+            <span style="left: 20%; animation-duration: 12s;"></span>
+            <span style="left: 30%; animation-duration: 10s;"></span>
+            <span style="left: 40%; animation-duration: 14s;"></span>
+            <span style="left: 50%; animation-duration: 9s;"></span>
+            <span style="left: 60%; animation-duration: 11s;"></span>
+            <span style="left: 70%; animation-duration: 13s;"></span>
+            <span style="left: 80%; animation-duration: 10s;"></span>
+        </div>
+        
+        <div class="content">
+            <div class="robot-icon">🤖</div>
+            <div class="thankyou-main">THANK YOU</div>
+            
+            <div class="circle-decoration">
+                <div class="circle"></div><div class="circle"></div><div class="circle"></div>
+                <div class="circle"></div><div class="circle"></div><div class="circle"></div>
+                <div class="circle"></div><div class="circle"></div>
+            </div>
+            
+            <div class="thankyou-sub">for your attention</div>
+            
+            <div class="project-name">
+                <span>✦</span> autonomous obstacle avoidance robot <span>✦</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- NAVIGATION SCRIPT -->
+    <script>
+        const pages = [
+            'A Main Slide.html',
+            'B Index.html',
+            'C Introduction.html',
+            'D Aim.html',
+            'E Components.html',
+            'F Working Principle.html',
+            'G Apllication.html',
+            'H Conclusion.html',
+            'I Thank you.html'
+        ];
+
+        const currentFile = window.location.pathname.split('/').pop();
+        let currentIndex = pages.indexOf(currentFile);
+        if (currentIndex === -1) {
+            for (let i = 0; i < pages.length; i++) {
+                if (currentFile.toLowerCase().includes('thank')) {
+                    currentIndex = i;
+                    break;
+                }
+            }
+        }
+        if (currentIndex === -1) currentIndex = 8;
+
+        window.nextPage = function() {
+            window.location.href = pages[0]; // Go back to Main Slide
+        };
+
+        window.previousPage = function() {
+            window.location.href = pages[7]; // Go to Conclusion
+        };
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === ' ' || e.key === 'Spacebar' || e.key === 'Enter' || e.key === 'ArrowRight') {
+                e.preventDefault();
+                window.nextPage();
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                window.previousPage();
+            }
+        });
+
+        window.addEventListener('load', function() {
+            const nav = document.createElement('div');
+            nav.style.cssText = 'position:fixed; bottom:20px; left:50%; transform:translateX(-50%); display:flex; gap:10px; z-index:99999; background:white; padding:10px 20px; border-radius:50px; border:2px solid #1677ff; box-shadow:0 5px 20px rgba(0,0,0,0.2);';
+            nav.innerHTML = `
+                <button onclick="window.previousPage()" style="background:#4a5568; color:white; border:none; padding:8px 20px; border-radius:30px; cursor:pointer; font-size:16px;">← Prev (Conclusion)</button>
+                <span style="padding:8px 15px; color:#1677ff; font-weight:bold; font-size:16px;">Page 9 of 9</span>
+                <button onclick="window.nextPage()" style="background:#1677ff; color:white; border:none; padding:8px 20px; border-radius:30px; cursor:pointer; font-size:16px;">Next (Main) →</button>
+            `;
+            document.body.appendChild(nav);
+        });
+    </script>
+</body>
+</html>

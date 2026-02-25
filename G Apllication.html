@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autonomous Robot · Applications</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #e8f0fe;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            padding: 2rem;
+        }
+
+        .slide {
+            max-width: 1280px;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background-color: #ffffff;
+            border-radius: 2.5rem;
+            box-shadow: 0 25px 50px -12px rgba(22, 119, 255, 0.25);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            border: 1px solid rgba(22, 119, 255, 0.2);
+        }
+
+        .accent-strip {
+            height: 12px;
+            background: linear-gradient(90deg, #1677ff, #ff4d6d, #00ffff, #b967ff, #ff4d6d, #1677ff);
+            background-size: 400% 100%;
+            animation: rgbBand 5s linear infinite;
+            width: 100%;
+        }
+
+        @keyframes rgbBand {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        .split-layout {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .text-panel {
+            flex: 1 1 58%;
+            background: #ffffff;
+            padding: 2rem 2.2rem 1.8rem 2.8rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 0.7rem;
+        }
+
+        .image-panel {
+            flex: 0 0 42%;
+            background: linear-gradient(145deg, #e6f0ff, #d4e4ff);
+            position: relative;
+            overflow: hidden;
+            border-left: 2px solid rgba(22, 119, 255, 0.25);
+        }
+
+        .image-panel img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: 50% 30%;
+            display: block;
+        }
+
+        /* LARGER RGB HEADING */
+        .main-heading {
+            font-size: 4rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            margin-bottom: 0.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .main-heading .gradient-text {
+            background: linear-gradient(90deg, #1677ff, #ff4d6d, #00c3ff, #b967ff, #1677ff);
+            background-size: 400% 100%;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: rgbHeading 6s ease infinite;
+        }
+
+        @keyframes rgbHeading {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .main-heading span {
+            background: #1677ff;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 500;
+            padding: 0.3rem 1.5rem;
+            border-radius: 40px;
+        }
+
+        .desc-text {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: #1e2f47;
+        }
+
+        .applications-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            margin: 0.5rem 0;
+        }
+
+        .app-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            background: #f5faff;
+            border-radius: 1.2rem;
+            padding: 1rem 1.5rem;
+            border: 1px solid rgba(22, 119, 255, 0.2);
+        }
+
+        .app-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #1677ff, #b967ff);
+            color: white;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+        }
+
+        .app-text {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #102a41;
+        }
+
+        .example-block {
+            background: #f0f7ff;
+            padding: 1rem 1.5rem;
+            border-radius: 1rem;
+            border-left: 4px solid #1677ff;
+            margin-top: 0.3rem;
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+
+        .footer-note {
+            margin-top: 0.8rem;
+            display: flex;
+            justify-content: flex-end;
+            font-size: 0.8rem;
+            color: #a0b8d0;
+            border-top: 1px dashed rgba(22, 119, 255, 0.2);
+            padding-top: 0.4rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <div class="accent-strip"></div>
+        <div class="split-layout">
+            <div class="text-panel">
+                <!-- LARGER RGB HEADING -->
+                <div class="main-heading">
+                    <span class="gradient-text"><h1>5. APPLICATIONS</h1></span> <span>real-world use</span>
+                </div>
+                <div class="desc-text">Now you might be thinking — where do we actually see this technology in real life?</div>
+                <div class="desc-text">The same idea used in our robot is used in many smart machines around us like:</div>
+                <div class="applications-list">
+                    <div class="app-item"><div class="app-icon">📦</div><div class="app-text">Delivery robots that bring food or parcels</div></div>
+                    <div class="app-item"><div class="app-icon">🏥</div><div class="app-text">Hospital robots that carry medicines</div></div>
+                    <div class="app-item"><div class="app-icon">🚒</div><div class="app-text">Rescue robots that work in disaster areas</div></div>
+                    <div class="app-item"><div class="app-icon">🏭</div><div class="app-text">Factory robots that move safely around workers</div></div>
+                </div>
+                <div class="desc-text"><strong>Self-driving cars</strong> use sensors to detect vehicles, people, and obstacles.</div>
+                <div class="desc-text">At home, <strong>robotic vacuum cleaners</strong> move around furniture without hitting walls.</div>
+                <div class="example-block">In large warehouses, autonomous robots carry heavy packages without human control.</div>
+                <div class="footer-note"><span>self-driving · delivery · rescue · warehouse</span></div>
+            </div>
+            <div class="image-panel">
+                <img src="https://cdn.pi.inc/ai/generate/b0e4c941843045b893c3a277e5e41459edeef0e88386bcaaf92959b5.webp" alt="Delivery robot" loading="lazy">
+            </div>
+        </div>
+    </div>
+
+    <!-- FIXED NAVIGATION SCRIPT -->
+    <script>
+        // ===== CORRECT PAGE ORDER =====
+        const pages = [
+            'A Main Slide.html',      // Page 1
+            'B Index.html',           // Page 2
+            'C Introduction.html',    // Page 3
+            'D Aim.html',             // Page 4
+            'E Components.html',      // Page 5
+            'F Working Principle.html', // Page 6
+            'G Apllication.html',      // Page 7 (THIS PAGE)
+            'H Conclusion.html',       // Page 8
+            'I Thank you.html'         // Page 9
+        ];
+
+        // Get current page filename
+        const currentFile = window.location.pathname.split('/').pop();
+        let currentIndex = pages.indexOf(currentFile);
+        
+        // If not found, try to find by matching
+        if (currentIndex === -1) {
+            for (let i = 0; i < pages.length; i++) {
+                if (currentFile.toLowerCase().includes('application') || 
+                    currentFile.toLowerCase().includes('g') || 
+                    currentFile.toLowerCase().includes('apllication')) {
+                    currentIndex = 6; // Page 7 is index 6
+                    break;
+                }
+            }
+        }
+        // Default to page 7 (index 6) if still not found
+        if (currentIndex === -1) currentIndex = 6;
+
+        // ===== NAVIGATION FUNCTIONS =====
+        window.nextPage = function() {
+            // From Applications (page 7), go to Conclusion (page 8)
+            const nextIndex = (currentIndex + 1) % pages.length;
+            window.location.href = pages[nextIndex];
+        };
+
+        window.previousPage = function() {
+            // From Applications (page 7), go to Working Principle (page 6)
+            const prevIndex = (currentIndex - 1 + pages.length) % pages.length;
+            window.location.href = pages[prevIndex];
+        };
+
+        // ===== KEYBOARD NAVIGATION =====
+        document.addEventListener('keydown', function(e) {
+            if (e.key === ' ' || e.key === 'Spacebar' || e.key === 'Enter' || e.key === 'ArrowRight') {
+                e.preventDefault();
+                window.nextPage();
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                window.previousPage();
+            }
+        });
+
+        // ===== ADD NAVIGATION BUTTONS =====
+        window.addEventListener('load', function() {
+            // Remove any existing navigation
+            const existingNav = document.querySelector('.nav-buttons-apps');
+            if (existingNav) existingNav.remove();
+            
+            const nav = document.createElement('div');
+            nav.className = 'nav-buttons-apps';
+            nav.style.cssText = 'position:fixed; bottom:20px; left:50%; transform:translateX(-50%); display:flex; gap:10px; z-index:99999; background:white; padding:10px 20px; border-radius:50px; border:2px solid #1677ff; box-shadow:0 5px 20px rgba(0,0,0,0.2);';
+            nav.innerHTML = `
+                <button onclick="window.previousPage()" style="background:#4a5568; color:white; border:none; padding:8px 20px; border-radius:30px; cursor:pointer; font-size:16px; font-weight:bold;">← Prev (Working Principle)</button>
+                <span style="padding:8px 15px; color:#1677ff; font-weight:bold; font-size:16px;">Page ${currentIndex+1} of 9</span>
+                <button onclick="window.nextPage()" style="background:#1677ff; color:white; border:none; padding:8px 20px; border-radius:30px; cursor:pointer; font-size:16px; font-weight:bold;">Next (Conclusion) →</button>
+            `;
+            document.body.appendChild(nav);
+        });
+    </script>
+</body>
+</html>

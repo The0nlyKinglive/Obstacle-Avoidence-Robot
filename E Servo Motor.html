@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servo Motor </title>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f7971e 0%, #ffd200 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .exhibition-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 40px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .exhibition-header {
+            background: linear-gradient(90deg, #f7971e, #ffd200, #f7971e, #ffd200, #f7971e);
+            background-size: 400% 100%;
+            animation: rgbFlow 10s linear infinite;
+            padding: 20px;
+            text-align: center;
+        }
+
+        @keyframes rgbFlow {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        .exhibition-header h1 {
+            font-size: 4rem;
+            color: white;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+            letter-spacing: 2px;
+        }
+
+        .exhibition-header p {
+            font-size: 1.5rem;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .exhibition-content {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 40px;
+            gap: 40px;
+        }
+
+        .image-section {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+        }
+
+        .servo-image {
+            width: 100%;
+            max-width: 400px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 30px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .servo-image img {
+            width: 100%;
+            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.2));
+        }
+
+        .image-caption {
+            margin-top: 20px;
+            font-size: 1.2rem;
+            color: #555;
+            font-weight: 500;
+        }
+
+        .fun-facts {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .fun-fact {
+            background: linear-gradient(135deg, #f7971e, #ffd200);
+            color: white;
+            padding: 15px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(247, 151, 30, 0.3);
+        }
+
+        .fun-fact i {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .fun-fact .fact-number {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .fun-fact .fact-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .info-section {
+            flex: 2;
+            min-width: 300px;
+        }
+
+        .info-card {
+            background: #f8f9fa;
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid #f7971e;
+            transition: all 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateX(10px);
+            box-shadow: 0 15px 40px rgba(247, 151, 30, 0.2);
+        }
+
+        .info-card h2 {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-card h2 i {
+            color: #f7971e;
+            font-size: 2rem;
+        }
+
+        .info-card p {
+            font-size: 1.2rem;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .easy-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .easy-list li {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            padding: 10px 15px;
+            background: white;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .easy-list li i {
+            width: 30px;
+            color: #f7971e;
+            font-size: 1.3rem;
+        }
+
+        .kid-friendly {
+            background: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+
+        .kid-friendly h3 {
+            color: #856404;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .kid-friendly p {
+            color: #856404;
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+
+        .specs-box {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .spec-item {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .spec-item i {
+            font-size: 2rem;
+            color: #f7971e;
+            margin-bottom: 10px;
+        }
+
+        .spec-item h3 {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .spec-item p {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #333;
+            margin: 0;
+        }
+
+        .project-showcase {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 15px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .project-card i {
+            font-size: 2.5rem;
+            color: #f7971e;
+            margin-bottom: 10px;
+        }
+
+        .project-card h4 {
+            font-size: 1.1rem;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .project-card p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .exhibition-footer {
+            background: #f1f3f5;
+            padding: 20px;
+            text-align: center;
+            border-top: 2px solid #dee2e6;
+            font-size: 1.2rem;
+            color: #666;
+        }
+
+        .exhibition-footer i {
+            color: #f7971e;
+            margin: 0 5px;
+        }
+
+        @media (max-width: 768px) {
+            .exhibition-header h1 { font-size: 2.5rem; }
+            .exhibition-content { flex-direction: column; }
+            .project-showcase { grid-template-columns: 1fr; }
+            .specs-box { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="exhibition-container">
+        <div class="exhibition-header">
+            <h1>🔄 MEET THE SERVO MOTOR!</h1>
+            <p>The Neck of Our Obstacle Avoidance Robot</p>
+        </div>
+
+        <div class="exhibition-content">
+            <div class="image-section">
+                <div class="servo-image">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3159/3159310.png" alt="Servo Motor">
+                </div>
+                <div class="image-caption">
+                    <i class="fas fa-cog"></i> SG90 Servo Motor
+                </div>
+                
+                <div class="fun-facts">
+                    <div class="fun-fact">
+                        <i class="fas fa-redo-alt"></i>
+                        <div class="fact-number">0-180°</div>
+                        <div class="fact-label">Rotation</div>
+                    </div>
+                    <div class="fun-fact">
+                        <i class="fas fa-weight-hanging"></i>
+                        <div class="fact-number">1.8kg/cm</div>
+                        <div class="fact-label">Torque</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-section">
+                <div class="info-card">
+                    <h2><i class="fas fa-question-circle"></i> What is a Servo Motor?</h2>
+                    <p>Think of it like the robot's <strong>neck</strong>! It can turn to specific positions very precisely. In our robot, it rotates the ultrasonic sensor left and right so the robot can look around!</p>
+                    
+                    <div class="kid-friendly">
+                        <h3><i class="fas fa-child"></i> For Beginners: Think of it like this...</h3>
+                        <p>🦒 Just like a giraffe moves its neck to look around,<br>
+                        🔄 This motor rotates exactly where we tell it to,<br>
+                        👀 It helps the robot's eyes (sensor) look left and right!</p>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <h2><i class="fas fa-tasks"></i> What does it do?</h2>
+                    <ul class="easy-list">
+                        <li>
+                            <i class="fas fa-location-dot"></i>
+                            <span><strong>POSITIONS</strong> - Moves to exact angles</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-arrows-spin"></i>
+                            <span><strong>ROTATES</strong> - Turns left and right precisely</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-hand"></i>
+                            <span><strong>HOLDS</strong> - Stays in position even when pushed</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-eye"></i>
+                            <span><strong>SCANS</strong> - Moves the sensor to look around</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-arrow-pointer"></i>
+                            <span><strong>POINTS</strong> - Can point at specific directions</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="info-card">
+                    <h2><i class="fas fa-chart-bar"></i> Quick Specs (Simple Version)</h2>
+                    <div class="specs-box">
+                        <div class="spec-item">
+                            <i class="fas fa-redo-alt"></i>
+                            <h3>Can Turn</h3>
+                            <p>0 to 180°</p>
+                        </div>
+                        <div class="spec-item">
+                            <i class="fas fa-weight-hanging"></i>
+                            <h3>Can Lift</h3>
+                            <p>1.8 kg</p>
+                        </div>
+                        <div class="spec-item">
+                            <i class="fas fa-bolt"></i>
+                            <h3>Power</h3>
+                            <p>5V</p>
+                        </div>
+                        <div class="spec-item">
+                            <i class="fas fa-clock"></i>
+                            <h3>Speed</h3>
+                            <p>0.1s per 60°</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <h2><i class="fas fa-rocket"></i> Cool Projects with Servo Motor</h2>
+                    <div class="project-showcase">
+                        <div class="project-card">
+                            <i class="fas fa-robot"></i>
+                            <h4>Robot Arm</h4>
+                            <p>Picks up small things</p>
+                        </div>
+                        <div class="project-card">
+                            <i class="fas fa-door-open"></i>
+                            <h4>Auto Door</h4>
+                            <p>Opens and closes</p>
+                        </div>
+                        <div class="project-card">
+                            <i class="fas fa-camera"></i>
+                            <h4>Pan-Tilt Camera</h4>
+                            <p>Moves camera around</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <h2><i class="fas fa-star"></i> Why it's Awesome</h2>
+                    <ul class="easy-list">
+                        <li>
+                            <i class="fas fa-check-circle" style="color: #28a745;"></i>
+                            <span><strong>Precise</strong> - Knows exactly where it is</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle" style="color: #28a745;"></i>
+                            <span><strong>Strong</strong> - Holds position with power</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle" style="color: #28a745;"></i>
+                            <span><strong>Easy Control</strong> - Just tell it the angle</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle" style="color: #28a745;"></i>
+                            <span><strong>Small Size</strong> - Fits anywhere!</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="info-card" style="border-left-color: #28a745;">
+                    <h2><i class="fas fa-robot" style="color: #28a745;"></i> In OUR Obstacle Robot</h2>
+                    <p>The servo motor is the robot's neck! It:</p>
+                    <ul class="easy-list">
+                        <li>
+                            <i class="fas fa-1"></i>
+                            <span>Turns the sensor to look LEFT</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-2"></i>
+                            <span>Turns the sensor to look RIGHT</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-3"></i>
+                            <span>Helps find the clearest path</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-4"></i>
+                            <span>Makes the robot smarter!</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="exhibition-footer">
+            <i class="fas fa-circle"></i> Servo Motor · The Robot's Neck <i class="fas fa-circle"></i>
+        </div>
+    </div>
+</body>
+</html>

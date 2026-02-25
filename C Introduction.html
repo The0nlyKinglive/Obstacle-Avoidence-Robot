@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autonomous Robot · Introduction</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #11181f;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Inter', 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            padding: 2rem;
+        }
+
+        .slide {
+            max-width: 1280px;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background-color: #0f172b;
+            border-radius: 2.5rem;
+            box-shadow: 0 30px 45px -10px rgba(0,0,0,0.6), 0 10px 20px -5px rgba(0,20,40,0.5);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .accent-strip {
+            height: 12px;
+            background: linear-gradient(90deg, #1677ff, #ff4d6d, #00ffff, #b967ff, #1677ff);
+            background-size: 400% 100%;
+            animation: rgbBand 6s linear infinite;
+            width: 100%;
+        }
+
+        @keyframes rgbBand {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        .split-layout {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .image-panel {
+            flex: 0 0 45%; 
+            background-color: #0b1423;
+            position: relative;
+            overflow: hidden;
+            border-right: 1px solid rgba(22, 119, 255, 0.25);
+        }
+
+        .image-panel img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: 50% 50%;
+            display: block;
+        }
+
+        .image-overlay {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(120deg, rgba(0,30,60,0.3) 0%, rgba(20,40,80,0.1) 80%);
+            pointer-events: none;
+        }
+
+        .text-panel {
+            flex: 1;
+            background: #0f1a2c;
+            padding: 2.5rem 2.8rem 2rem 2.8rem;
+            display: flex;
+            flex-direction: column;
+            color: #eef4ff;
+            overflow-y: auto;
+            gap: 1.2rem;
+        }
+
+        .list-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            color: white;
+            margin-bottom: 0.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .list-title .gradient {
+            background: linear-gradient(90deg, #1677ff, #ff4d6d, #00c3ff, #b967ff, #1677ff);
+            background-size: 400% 100%;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: rgbText 5s ease infinite;
+        }
+
+        @keyframes rgbText {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .list-title span {
+            background: #1677ff;
+            font-size: 1.2rem;
+            padding: 0.3rem 1.2rem;
+            border-radius: 30px;
+            font-weight: 500;
+            color: white;
+            letter-spacing: 0.3px;
+        }
+
+        .divider-light {
+            height: 2px;
+            background: rgba(255, 255, 255, 0.3);
+            width: 100%;
+            margin: 0.5rem 0 1rem 0;
+        }
+
+        .intro-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .list-item {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 1rem;
+        }
+
+        .item-num {
+            font-size: 2.5rem;
+            font-weight: 700;
+            font-style: italic;
+            background: linear-gradient(90deg, #1677ff, #ff4d6d);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+            min-width: 2.5rem;
+            text-align: right;
+        }
+
+        .item-content {
+            flex: 1;
+        }
+
+        .item-heading4 {
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 0.25rem;
+            line-height: 1.4;
+        }
+
+        .item-paragraph {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: #cbd5e6;
+        }
+
+        .footer-placeholder {
+            margin-top: auto;
+            display: flex;
+            justify-content: flex-end;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.3);
+            border-top: 1px dashed rgba(255,255,255,0.1);
+            padding-top: 0.8rem;
+        }
+
+        .footer-placeholder span {
+            background: rgba(255,255,255,0.05);
+            padding: 0.2rem 1rem;
+            border-radius: 20px;
+            color: rgba(255,255,255,0.5);
+        }
+
+        @media (max-width: 900px) {
+            .split-layout { flex-direction: column; }
+            .image-panel { flex: 0 0 240px; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.15); }
+            .list-title { font-size: 2.8rem; }
+            .item-heading4 { font-size: 1.4rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <div class="accent-strip"></div>
+        
+        <div class="split-layout">
+            <div class="image-panel">
+                <img src="https://cdn.pi.inc/ai/generate/a888e37b67b443ac95418d4714526452fd389f965b44919405ede230.webp" 
+                     alt="Abstract robot navigating geometric shapes"
+                     loading="lazy">
+                <div class="image-overlay"></div>
+            </div>
+            <div class="text-panel">
+                <div class="list-title">
+                    <span class="gradient"><h1>INTRODUCTION</h1></span> <span>01</span>
+                </div>
+                
+                <div class="divider-light"></div>
+
+                <div class="intro-list">
+                    <div class="list-item">
+                        <div class="item-num">1</div>
+                        <div class="item-content">
+                            <div class="item-heading4">INTRODUCTION</div>
+                            <div class="item-paragraph">Hello everyone! Welcome to our project demonstration. Today we are going to show you our Autonomous Obstacle Avoidance Robot using Quarky.</div>
+                        </div>
+                    </div>
+
+                    <div class="list-item">
+                        <div class="item-num">2</div>
+                        <div class="item-content">
+                            <div class="item-heading4">Have you ever seen a robotic vacuum cleaner at home? Or heard about self-driving cars?</div>
+                            <div class="item-paragraph">How can they move around without hitting objects? This is exactly what we tried to understand and build through this project.</div>
+                        </div>
+                    </div>
+
+                    <div class="list-item">
+                        <div class="item-num">3</div>
+                        <div class="item-content">
+                            <div class="item-heading4">Once we switch it on, it starts moving independently.</div>
+                            <div class="item-paragraph">If something comes in front of it, it does not crash — instead, it stops, checks both sides, and chooses a clear path. Our project works on the same principle — we built this robot to understand how modern robots and self-driving systems work in real life.</div>
+                        </div>
+                    </div>
+
+                    <div class="list-item">
+                        <div class="item-num">4</div>
+                        <div class="item-content">
+                            <div class="item-heading4">In simple words, this robot can "see", "think", and "decide" where to go.</div>
+                            <div class="item-paragraph">And the most interesting part is — once we switch it on, it does everything by itself without any human help or remote control.</div>
+                        </div>
+                    </div>
+
+                    <div class="list-item">
+                        <div class="item-num">5</div>
+                        <div class="item-content">
+                            <div class="item-heading4">Even though this is a small model, the technology behind it is very powerful.</div>
+                            <div class="item-paragraph">It is used in many real-world applications. This project helps us understand how robots in the real world are designed to move safely and intelligently in complex environments.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="footer-placeholder">
+                    <span>autonomous · intelligent · decision-making</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FIXED NAVIGATION SCRIPT -->
+    <script>
+        // ===== CORRECT PAGE ORDER =====
+        const pages = [
+            'A Main Slide.html',      // Page 1
+            'B Index.html',           // Page 2
+            'C Introduction.html',    // Page 3 (THIS PAGE)
+            'D Aim.html',             // Page 4
+            'E Components.html',      // Page 5
+            'F Working Principle.html', // Page 6
+            'G Apllication.html',      // Page 7
+            'H Conclusion.html',       // Page 8
+            'I Thank you.html'         // Page 9
+        ];
+
+        // Get current page filename
+        const currentFile = window.location.pathname.split('/').pop();
+        let currentIndex = pages.indexOf(currentFile);
+        
+        // If not found, try to find by matching
+        if (currentIndex === -1) {
+            for (let i = 0; i < pages.length; i++) {
+                if (currentFile.toLowerCase().includes('introduction') || 
+                    (currentFile.toLowerCase().includes('c') && currentFile.toLowerCase().includes('.html'))) {
+                    currentIndex = 2; // Page 3 is index 2
+                    break;
+                }
+            }
+        }
+        // Default to page 3 (index 2) if still not found
+        if (currentIndex === -1) currentIndex = 2;
+
+        // ===== NAVIGATION FUNCTIONS =====
+        window.nextPage = function() {
+            const nextIndex = (currentIndex + 1) % pages.length;
+            window.location.href = pages[nextIndex];
+        };
+
+        window.previousPage = function() {
+            const prevIndex = (currentIndex - 1 + pages.length) % pages.length;
+            window.location.href = pages[prevIndex];
+        };
+
+        // ===== KEYBOARD NAVIGATION =====
+        document.addEventListener('keydown', function(event) {
+            if (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA') return;
+            
+            if (event.key === ' ' || event.key === 'Spacebar' || event.key === 'Enter' || event.key === 'ArrowRight') {
+                event.preventDefault();
+                window.nextPage();
+            }
+            else if (event.key === 'ArrowLeft') {
+                event.preventDefault();
+                window.previousPage();
+            }
+        });
+
+        // ===== ADD NAVIGATION BUTTONS =====
+        function addNavigationButtons() {
+            // Remove any existing navigation buttons
+            const existingNav = document.querySelector('.nav-buttons-intro');
+            if (existingNav) existingNav.remove();
+            
+            const navContainer = document.createElement('div');
+            navContainer.className = 'nav-buttons-intro';
+            navContainer.style.cssText = 'position:fixed; bottom:20px; left:50%; transform:translateX(-50%); display:flex; gap:10px; z-index:99999; background:white; padding:10px 20px; border-radius:50px; border:2px solid #1677ff; box-shadow:0 5px 20px rgba(0,0,0,0.2);';
+            navContainer.innerHTML = `
+                <button onclick="window.previousPage()" style="background:#4a5568; color:white; border:none; padding:8px 20px; border-radius:30px; cursor:pointer; font-size:16px; font-weight:bold;">← Prev</button>
+                <span style="padding:8px 15px; color:#1677ff; font-weight:bold; font-size:16px;">Page ${currentIndex+1} of 9</span>
+                <button onclick="window.nextPage()" style="background:#1677ff; color:white; border:none; padding:8px 20px; border-radius:30px; cursor:pointer; font-size:16px; font-weight:bold;">Next →</button>
+            `;
+            document.body.appendChild(navContainer);
+        }
+
+        // Run when page loads
+        window.addEventListener('load', addNavigationButtons);
+    </script>
+</body>
+</html>

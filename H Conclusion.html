@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autonomous Robot · Conclusion</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #d9e2ef;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Inter', 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            padding: 2rem;
+        }
+
+        .slide {
+            max-width: 1280px;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background-color: #ffffff;
+            border-radius: 2.5rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 40, 80, 0.25);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            border: 1px solid rgba(22, 119, 255, 0.15);
+        }
+
+        .accent-strip {
+            height: 12px;
+            background: linear-gradient(90deg, #1677ff, #ff4d6d, #00ffff, #b967ff, #ff4d6d, #1677ff);
+            background-size: 400% 100%;
+            animation: rgbBand 5s linear infinite;
+            width: 100%;
+        }
+
+        @keyframes rgbBand {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        .split-layout {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .text-panel {
+            flex: 1 1 58%;
+            background: #ffffff;
+            padding: 2rem 2.2rem 1.8rem 2.8rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .image-panel {
+            flex: 0 0 42%;
+            background-color: #e6f0ff;
+            position: relative;
+            overflow: hidden;
+            border-left: 2px solid rgba(22, 119, 255, 0.25);
+        }
+
+        .image-panel img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: 50% 30%;
+            display: block;
+        }
+
+        /* LARGER RGB HEADING */
+        .main-heading {
+            font-size: 4rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            margin-bottom: 0.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .main-heading .rgb-text {
+            background: linear-gradient(90deg, #1677ff, #ff4d6d, #00c3ff, #b967ff, #1677ff);
+            background-size: 400% 100%;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: rgbHeading 6s ease infinite;
+        }
+
+        @keyframes rgbHeading {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .main-heading span {
+            background: #1677ff;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 500;
+            padding: 0.3rem 1.5rem;
+            border-radius: 40px;
+        }
+
+        .desc-text {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: #1e2f47;
+            font-weight: 400;
+        }
+
+        .desc-text strong {
+            color: #1677ff;
+            font-weight: 600;
+        }
+
+        .foundation-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            margin: 0.3rem 0 0.5rem 0;
+        }
+
+        .foundation-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: #f5faff;
+            border-radius: 1.2rem;
+            padding: 0.8rem 1.5rem;
+            border-left: 6px solid #1677ff;
+            box-shadow: 0 2px 6px rgba(22, 119, 255, 0.1);
+        }
+
+        .foundation-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #1677ff, #b967ff);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .foundation-text {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #102a41;
+        }
+
+        .thank-you {
+            background: #e6f0ff;
+            padding: 1rem 1.5rem;
+            border-radius: 2rem;
+            font-weight: 500;
+            color: #003c7c;
+            text-align: center;
+            margin-top: 0.5rem;
+            border: 1px dashed #1677ff;
+            font-size: 1.2rem;
+        }
+
+        .footer-note {
+            margin-top: 0.6rem;
+            display: flex;
+            justify-content: flex-end;
+            font-size: 0.8rem;
+            color: #a0b8d0;
+            border-top: 1px dashed rgba(22, 119, 255, 0.2);
+            padding-top: 0.4rem;
+        }
+
+        @media (max-width: 1000px) {
+            .split-layout { flex-direction: column; }
+            .image-panel { flex: 0 0 260px; border-left: none; border-top: 2px solid #1677ff40; }
+            .main-heading { font-size: 3.2rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <div class="accent-strip"></div>
+
+        <div class="split-layout">
+            <div class="text-panel">
+                <!-- LARGER RGB HEADING -->
+                <div class="main-heading">
+                    <span class="rgb-text"><h1>6. CONCLUSION</h1></span> <span>key takeaways</span>
+                </div>
+
+                <div class="desc-text">
+                    In conclusion, this project successfully demonstrates how sensors, programming, and mechanical components work together to create an intelligent system. Our <strong>Autonomous Obstacle Avoidance Robot</strong> can detect obstacles, analyze its surroundings, and safely navigate without human control. Through this project, we learned the importance of logical thinking, problem-solving, and real-time decision-making in robotics.
+                </div>
+
+                <div class="desc-text">
+                    This project is not just a model; it represents the foundation of advanced technologies such as:
+                </div>
+
+                <div class="foundation-list">
+                    <div class="foundation-item">
+                        <div class="foundation-icon">🚗</div>
+                        <div class="foundation-text">Self-driving cars</div>
+                    </div>
+                    <div class="foundation-item">
+                        <div class="foundation-icon">🏭</div>
+                        <div class="foundation-text">Automated warehouse robots</div>
+                    </div>
+                    <div class="foundation-item">
+                        <div class="foundation-icon">🧹</div>
+                        <div class="foundation-text">Robotic vacuum cleaners</div>
+                    </div>
+                    <div class="foundation-item">
+                        <div class="foundation-icon">🚁</div>
+                        <div class="foundation-text">Delivery drones</div>
+                    </div>
+                </div>
+
+                <div class="desc-text">
+                    By building this robot, we have taken a small step toward understanding the future of automation and artificial intelligence. Robotics is not just about machines — it is about teaching machines how to think and respond intelligently.
+                </div>
+
+                <div class="thank-you">
+                    🙏 Thank you for your time and attention. I would be happy to demonstrate the working of my robot and answer your questions.
+                </div>
+
+                <div class="footer-note">
+                    <span>sensors · programming · ai · automation</span>
+                </div>
+            </div>
+
+            <div class="image-panel">
+                <img src="https://cdn.pi.inc/ai/generate/e02dd419a0624f139027a88756ee6d5edd81fae487425beff854fc98.webp" 
+                     alt="Autonomous robot navigating around obstacles in modern environment"
+                     loading="lazy">
+            </div>
+        </div>
+    </div>
+
+    <!-- FIXED NAVIGATION SCRIPT -->
+    <script>
+        // ===== CORRECT PAGE ORDER =====
+        const pages = [
+            'A Main Slide.html',      // Page 1
+            'B Index.html',           // Page 2
+            'C Introduction.html',    // Page 3
+            'D Aim.html',             // Page 4
+            'E Components.html',      // Page 5
+            'F Working Principle.html', // Page 6
+            'G Apllication.html',      // Page 7
+            'H Conclusion.html',       // Page 8 (THIS PAGE)
+            'I Thank you.html'         // Page 9
+        ];
+
+        // Get current page filename
+        const currentFile = window.location.pathname.split('/').pop();
+        let currentIndex = pages.indexOf(currentFile);
+        
+        // If not found, try to find by matching
+        if (currentIndex === -1) {
+            for (let i = 0; i < pages.length; i++) {
+                if (currentFile.toLowerCase().includes('conclusion') || 
+                    (currentFile.toLowerCase().includes('h') && currentFile.toLowerCase().includes('.html'))) {
+                    currentIndex = 7; // Page 8 is index 7
+                    break;
+                }
+            }
+        }
+        // Default to page 8 (index 7) if still not found
+        if (currentIndex === -1) currentIndex = 7;
+
+        // ===== NAVIGATION FUNCTIONS =====
+        window.nextPage = function() {
+            // From Conclusion (page 8), go to Thank You (page 9)
+            const nextIndex = (currentIndex + 1) % pages.length;
+            window.location.href = pages[nextIndex];
+        };
+
+        window.previousPage = function() {
+            // From Conclusion (page 8), go to Applications (page 7)
+            const prevIndex = (currentIndex - 1 + pages.length) % pages.length;
+            window.location.href = pages[prevIndex];
+        };
+
+        // ===== KEYBOARD NAVIGATION =====
+        document.addEventListener('keydown', function(e) {
+            if (e.key === ' ' || e.key === 'Spacebar' || e.key === 'Enter' || e.key === 'ArrowRight') {
+                e.preventDefault();
+                window.nextPage();
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                window.previousPage();
+            }
+        });
+
+        // ===== ADD NAVIGATION BUTTONS =====
+        window.addEventListener('load', function() {
+            // Remove any existing navigation
+            const existingNav = document.querySelector('.nav-buttons-conclusion');
+            if (existingNav) existingNav.remove();
+            
+            const nav = document.createElement('div');
+            nav.className = 'nav-buttons-conclusion';
+            nav.style.cssText = 'position:fixed; bottom:20px; left:50%; transform:translateX(-50%); display:flex; gap:10px; z-index:99999; background:white; padding:10px 20px; border-radius:50px; border:2px solid #1677ff; box-shadow:0 5px 20px rgba(0,0,0,0.2);';
+            nav.innerHTML = `
+                <button onclick="window.previousPage()" style="background:#4a5568; color:white; border:none; padding:8px 20px; border-radius:30px; cursor:pointer; font-size:16px; font-weight:bold;">← Prev (Applications)</button>
+                <span style="padding:8px 15px; color:#1677ff; font-weight:bold; font-size:16px;">Page ${currentIndex+1} of 9</span>
+                <button onclick="window.nextPage()" style="background:#1677ff; color:white; border:none; padding:8px 20px; border-radius:30px; cursor:pointer; font-size:16px; font-weight:bold;">Next (Thank You) →</button>
+            `;
+            document.body.appendChild(nav);
+        });
+    </script>
+</body>
+</html>

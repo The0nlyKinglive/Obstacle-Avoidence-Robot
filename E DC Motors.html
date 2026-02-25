@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DC Motors </title>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .exhibition-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 40px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .exhibition-header {
+            background: linear-gradient(90deg, #11998e, #38ef7d, #11998e, #38ef7d, #11998e);
+            background-size: 400% 100%;
+            animation: rgbFlow 10s linear infinite;
+            padding: 20px;
+            text-align: center;
+        }
+
+        @keyframes rgbFlow {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        .exhibition-header h1 {
+            font-size: 4rem;
+            color: white;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+            letter-spacing: 2px;
+        }
+
+        .exhibition-header p {
+            font-size: 1.5rem;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .exhibition-content {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 40px;
+            gap: 40px;
+        }
+
+        .image-section {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+        }
+
+        .dc-image {
+            width: 100%;
+            max-width: 400px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 30px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .dc-image img {
+            width: 100%;
+            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.2));
+        }
+
+        .image-caption {
+            margin-top: 20px;
+            font-size: 1.2rem;
+            color: #555;
+            font-weight: 500;
+        }
+
+        .fun-facts {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .fun-fact {
+            background: linear-gradient(135deg, #11998e, #38ef7d);
+            color: white;
+            padding: 15px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(17, 153, 142, 0.3);
+        }
+
+        .fun-fact i {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .fun-fact .fact-number {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .fun-fact .fact-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .info-section {
+            flex: 2;
+            min-width: 300px;
+        }
+
+        .info-card {
+            background: #f8f9fa;
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid #11998e;
+            transition: all 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateX(10px);
+            box-shadow: 0 15px 40px rgba(17, 153, 142, 0.2);
+        }
+
+        .info-card h2 {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-card h2 i {
+            color: #11998e;
+            font-size: 2rem;
+        }
+
+        .info-card p {
+            font-size: 1.2rem;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .easy-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .easy-list li {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            padding: 10px 15px;
+            background: white;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .easy-list li i {
+            width: 30px;
+            color: #11998e;
+            font-size: 1.3rem;
+        }
+
+        .kid-friendly {
+            background: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+
+        .kid-friendly h3 {
+            color: #856404;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .kid-friendly p {
+            color: #856404;
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+
+        .specs-box {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .spec-item {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .spec-item i {
+            font-size: 2rem;
+            color: #11998e;
+            margin-bottom: 10px;
+        }
+
+        .spec-item h3 {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .spec-item p {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #333;
+            margin: 0;
+        }
+
+        .project-showcase {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 15px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .project-card i {
+            font-size: 2.5rem;
+            color: #11998e;
+            margin-bottom: 10px;
+        }
+
+        .project-card h4 {
+            font-size: 1.1rem;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .project-card p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .exhibition-footer {
+            background: #f1f3f5;
+            padding: 20px;
+            text-align: center;
+            border-top: 2px solid #dee2e6;
+            font-size: 1.2rem;
+            color: #666;
+        }
+
+        .exhibition-footer i {
+            color: #11998e;
+            margin: 0 5px;
+        }
+
+        @media (max-width: 768px) {
+            .exhibition-header h1 { font-size: 2.5rem; }
+            .exhibition-content { flex-direction: column; }
+            .project-showcase { grid-template-columns: 1fr; }
+            .specs-box { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="exhibition-container">
+        <div class="exhibition-header">
+            <h1>⚙️ MEET THE DC MOTORS!</h1>
+            <p>The Legs of Our Obstacle Avoidance Robot</p>
+        </div>
+
+        <div class="exhibition-content">
+            <div class="image-section">
+                <div class="dc-image">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2942/2942622.png" alt="DC Motors">
+                </div>
+                <div class="image-caption">
+                    <i class="fas fa-motorcycle"></i> DC Gear Motors
+                </div>
+                
+                <div class="fun-facts">
+                    <div class="fun-fact">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <div class="fact-number">200 RPM</div>
+                        <div class="fact-label">Speed</div>
+                    </div>
+                    <div class="fun-fact">
+                        <i class="fas fa-weight-hanging"></i>
+                        <div class="fact-number">800g/cm</div>
+                        <div class="fact-label">Torque</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-section">
+                <div class="info-card">
+                    <h2><i class="fas fa-question-circle"></i> What are DC Motors?</h2>
+                    <p>Think of them as the robot's <strong>legs</strong>! They spin the wheels to make the robot move forward, backward, and turn. Without them, the robot would just sit in one place!</p>
+                    
+                    <div class="kid-friendly">
+                        <h3><i class="fas fa-child"></i> For Beginners: Think of it like this...</h3>
+                        <p>🦵 Just like your legs help you walk and run,<br>
+                        🔄 These motors spin the wheels to move,<br>
+                        🏃 They can go forward, backward, and turn!</p>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <h2><i class="fas fa-tasks"></i> What do they do?</h2>
+                    <ul class="easy-list">
+                        <li>
+                            <i class="fas fa-forward"></i>
+                            <span><strong>MOVE FORWARD</strong> - Spin wheels to go ahead</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-backward"></i>
+                            <span><strong>MOVE BACKWARD</strong> - Reverse direction</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-rotate-left"></i>
+                            <span><strong>TURN LEFT</strong> - One motor slows down</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-rotate-right"></i>
+                            <span><strong>TURN RIGHT</strong> - Other motor slows down</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-stop"></i>
+                            <span><strong>STOP</strong> - Hold the robot in place</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="info-card">
+                    <h2><i class="fas fa-chart-bar"></i> Quick Specs (Simple Version)</h2>
+                    <div class="specs-box">
+                        <div class="spec-item">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <h3>Speed</h3>
+                            <p>200 RPM</p>
+                        </div>
+                        <div class="spec-item">
+                            <i class="fas fa-weight-hanging"></i>
+                            <h3>Pulling Power</h3>
+                            <p>Strong</p>
+                        </div>
+                        <div class="spec-item">
+                            <i class="fas fa-bolt"></i>
+                            <h3>Power</h3>
+                            <p>3-12V</p>
+                        </div>
+                        <div class="spec-item">
+                            <i class="fas fa-gear"></i>
+                            <h3>Gear Ratio</h3>
+                            <p>1:48</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <h2><i class="fas fa-rocket"></i> Cool Projects with DC Motors</h2>
+                    <div class="project-showcase">
+                        <div class="project-card">
+                            <i class="fas fa-robot"></i>
+                            <h4>Robot Car</h4>
+                            <p>Our project! Moves around</p>
+                        </div>
+                        <div class="project-card">
+                            <i class="fas fa-fan"></i>
+                            <h4>Electric Fan</h4>
+                            <p>Spins to create wind</p>
+                        </div>
+                        <div class="project-card">
+                            <i class="fas fa-conveyor-belt"></i>
+                            <h4>Conveyor Belt</h4>
+                            <p>Moves things along</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <h2><i class="fas fa-star"></i> Why they're Awesome</h2>
+                    <ul class="easy-list">
+                        <li>
+                            <i class="fas fa-check-circle" style="color: #28a745;"></i>
+                            <span><strong>Powerful</strong> - Can push heavy things</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle" style="color: #28a745;"></i>
+                            <span><strong>Simple</strong> - Easy to control</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle" style="color: #28a745;"></i>
+                            <span><strong>Durable</strong> - Last a long time</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle" style="color: #28a745;"></i>
+                            <span><strong>Cheap</strong> - Very affordable</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="info-card" style="border-left-color: #28a745;">
+                    <h2><i class="fas fa-robot" style="color: #28a745;"></i> In OUR Obstacle Robot</h2>
+                    <p>The DC motors are the robot's legs! They:</p>
+                    <ul class="easy-list">
+                        <li>
+                            <i class="fas fa-1"></i>
+                            <span>Spin the wheels to move forward</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-2"></i>
+                            <span>Turn left when obstacle is right</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-3"></i>
+                            <span>Turn right when obstacle is left</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-4"></i>
+                            <span>Stop when something is too close!</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="exhibition-footer">
+            <i class="fas fa-circle"></i> DC Motors · The Robot's Legs <i class="fas fa-circle"></i>
+        </div>
+    </div>
+</body>
+</html>
