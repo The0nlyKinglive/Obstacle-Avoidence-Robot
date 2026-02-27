@@ -262,6 +262,38 @@
         document.body.appendChild(nav);
     };
 </script>
+	<!-- AUTO-ADVANCE EVERY 10 SECONDS -->
+<script>
+    // AUTO-ADVANCE SLIDES EVERY 10 SECONDS
+    let autoAdvanceTimer;
+
+    function startAutoAdvance() {
+        if (autoAdvanceTimer) clearInterval(autoAdvanceTimer);
+        autoAdvanceTimer = setInterval(function() {
+            if (typeof window.nextPage === 'function') {
+                window.nextPage();
+            }
+        }, 10000);
+    }
+
+    function resetAutoAdvance() {
+        if (autoAdvanceTimer) {
+            clearInterval(autoAdvanceTimer);
+            startAutoAdvance();
+        }
+    }
+
+    window.addEventListener('load', function() {
+        startAutoAdvance();
+        document.addEventListener('click', resetAutoAdvance);
+        document.addEventListener('keydown', resetAutoAdvance);
+        document.addEventListener('mousemove', resetAutoAdvance);
+    });
+
+    window.addEventListener('beforeunload', function() {
+        if (autoAdvanceTimer) clearInterval(autoAdvanceTimer);
+    });
+</script>
 </head>
 <body>
     <!-- main card -->
@@ -415,5 +447,6 @@
 </body>
 
 </html>
+
 
 
